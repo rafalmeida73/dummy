@@ -1,9 +1,10 @@
-import { Text, View } from 'react-native'
+import { Box } from '@/components/ui/box'
+import { Text } from '@/components/ui/text'
 
 export default function Index() {
   return (
-    <View>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <Box className="bg-primary-500 p-5">
+      <Text className="text-typography-0">This is the Box</Text>
+    </Box>
   )
 }

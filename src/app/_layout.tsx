@@ -1,8 +1,8 @@
 import { Stack } from 'expo-router'
 import '@/global.css'
-import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider'
 const { Screen } = Stack
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { GluestackUIProvider } from '../components/ui/gluestack-ui-provider'
 
 export default function Layout() {
   const queryClient = new QueryClient()
