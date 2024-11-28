@@ -10,12 +10,12 @@ export default function Layout() {
   return (
     <QueryClientProvider client={queryClient}>
       <GluestackUIProvider mode="light">
-        <Stack>
-          <Screen name="index" />
+        <Stack screenOptions={{
+          headerShown: false,
+        }}>
+          <Screen name="(signIn)" />
           <Screen
-            name="(auth)" options={{
-              headerShown: false,
-            }}
+            name="(auth)"
           />
         </Stack>
       </GluestackUIProvider>

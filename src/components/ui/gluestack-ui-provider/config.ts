@@ -95,7 +95,7 @@ export const config = {
     '--color-info-400': '50 180 244',
     '--color-info-500': '13 166 242',
     '--color-info-600': '11 141 205',
-    '--color-info-700': '9 115 168',
+    '--color-info-700': '37 103 232',
     '--color-info-800': '7 90 131',
     '--color-info-900': '5 64 93',
     '--color-info-950': '3 38 56',

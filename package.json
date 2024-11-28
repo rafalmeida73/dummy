@@ -15,7 +15,11 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/html-elements": "0.4.2",
     "@expo/vector-icons": "^14.0.2",
+    "@gluestack-ui/button": "^1.0.8",
+    "@gluestack-ui/icon": "^0.1.23",
+    "@gluestack-ui/input": "^0.1.32",
     "@gluestack-ui/nativewind-utils": "1.0.23",
     "@gluestack-ui/overlay": "^0.1.16",
     "@gluestack-ui/toast": "^1.0.8",
@@ -39,6 +43,7 @@
     "expo-system-ui": "~4.0.4",
     "expo-web-browser": "~14.0.1",
     "lodash": "^4.17.21",
+    "lucide-react-native": "^0.462.0",
     "nativewind": "4.0.36",
     "react": "18.3.1",
     "react-dom": "18.3.1",
