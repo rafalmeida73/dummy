@@ -1,10 +1,14 @@
-import { Stack } from "expo-router"
+import { Stack } from 'expo-router'
 const { Screen } = Stack
 
 export default function Layout() {
-  return (<Stack screenOptions={{}}>
-    <Screen name="products_list" options={{
-      headerShown: false
-    }}/>
-  </Stack>)
+  return (
+    <Stack screenOptions={{}}>
+      <Screen
+        name="products_list" options={{
+          headerShown: false,
+        }}
+      />
+    </Stack>
+  )
 }

@@ -1,10 +1,10 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from 'react'
+import { View } from 'react-native'
 
 // import { Container } from './styles';
 
-const products_list: React.FC = () => {
-  return <View />;
+const ProductsList = () => {
+  return <View />
 }
 
-export default products_list;
+export default ProductsList
