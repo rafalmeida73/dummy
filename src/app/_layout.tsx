@@ -12,7 +12,8 @@ export default function Layout() {
       <GluestackUIProvider mode="light">
         <Stack screenOptions={{
           headerShown: false,
-        }}>
+        }}
+        >
           <Screen name="(signIn)" />
           <Screen
             name="(auth)"

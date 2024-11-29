@@ -1,11 +1,11 @@
-import { TextInputProps } from "react-native";
-import Feather from "@expo/vector-icons/Feather";
-import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
+import { TextInputProps } from 'react-native'
+import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
 
 export interface InputProps extends TextInputProps {
-  rightIcon?: keyof typeof Feather.glyphMap;
+  rightIcon?: 'eye' | 'eye-off' ;
   rightIconOnPress?: () => void;
-  error?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
+  error?: string | FieldError | Merge<FieldError, FieldErrorsImpl<never>>;
+  label?: string;
 }
 
 export interface InputRef {
