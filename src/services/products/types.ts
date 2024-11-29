@@ -3,7 +3,7 @@ export interface IProductIdProps {
 }
 
 export interface IProductCategoryProps {
-  category?: string
+  categories: Array<String>
 }
 
 export interface ISingleProductResponse {
@@ -58,4 +58,9 @@ export interface IProductByCategoryResponse {
   total: number,
   skip: number,
   limit: number
+}
+
+export interface IProductByCategoriesResponse {
+  products: ISingleProductResponse[];
+  total: number;
 }

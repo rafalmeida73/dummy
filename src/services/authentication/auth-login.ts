@@ -7,7 +7,5 @@ export const authLogin = async (userData: IAuthLoginProps) => {
     userData,
   )
 
-  console.log('userData', userData, data)
-
   return data
 }

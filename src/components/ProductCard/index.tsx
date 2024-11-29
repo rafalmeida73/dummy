@@ -3,8 +3,10 @@ import { Box } from '../ui/box'
 import { Heading } from '../ui/heading'
 import { Image } from '../ui/image'
 import { Text } from '../ui/text'
+import { IProductCategoryProps } from './types'
+import { formatedPrice } from '@/utils/intl/formatMoney'
 
-export const ProductCard = () => {
+export const ProductCard = ({ title, images, description, price, discountPercentage, priceWithDiscount }: IProductCategoryProps) => {
   return (
     <Link
       href="/(signIn)"
@@ -15,29 +17,33 @@ export const ProductCard = () => {
       <Box className="border-2 border-primary-0 rounded-lg ">
         <Image
           source={{
-            uri: 'https://gluestack.github.io/public-blog-video-assets/mountains.png',
+            uri: `${images[0]}`,
           }}
           alt="Logo"
           size="none"
-          className="aspect-[320/200] w-full  border-b-2"
-          resizeMode="cover"
+          className="aspect-[320/200] w-full border-b-2 border-primary-0 "
+          resizeMode="contain"
+
         />
         <Box className="p-5">
-          <Heading size="md" className="text-primary-950 font-bold mb-3">
-            Título
+          <Heading size="md" numberOfLines={2} className="text-primary-950 font-bold mb-3 h-16">
+            {title}
           </Heading>
 
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis
+          <Text numberOfLines={15} className='h-64'>
+            {description}
           </Text>
 
-          <Box className="flex-row items-center mt-5">
+          <Box className="flex-row items-center mt-5 flex-wrap h-10">
             <Heading size="sm" className="text-primary-950 font-bold mr-2">
-              R$ 100,00
+              {formatedPrice(priceWithDiscount)}
             </Heading>
-            <Text size="xs" className="line-through">
-              R$ 150,00
-            </Text>
+
+            {discountPercentage > 0 && (
+              <Text size="xs" className="line-through">
+                {formatedPrice(price)}
+              </Text>
+            )}
           </Box>
         </Box>
       </Box>
