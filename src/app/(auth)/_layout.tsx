@@ -12,7 +12,10 @@ export default function Layout() {
     }}
     >
       <Screen
-        name="products_list"
+        name="product"
+      />
+      <Screen
+        name="home"
       />
     </Tabs>
   )

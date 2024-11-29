@@ -1,25 +1,28 @@
-import { Link } from 'expo-router'
 import { Box } from '../ui/box'
 import { Heading } from '../ui/heading'
 import { Image } from '../ui/image'
 import { Text } from '../ui/text'
 import { IProductCategoryProps } from './types'
 import { formatedPrice } from '@/utils/intl/formatMoney'
+import { Pressable } from '../ui/pressable'
 
-export const ProductCard = ({ title, images, description, price, discountPercentage, priceWithDiscount }: IProductCategoryProps) => {
+export const ProductCard = (productData: IProductCategoryProps) => {
+  const { title, images, description, price, discountPercentage, priceWithDiscount, handleRedirectToProduct,thumbnail } = productData
+
   return (
-    <Link
-      href="/(signIn)"
-      style={{
-        width: '48%',
-      }}
+    <Pressable onPress={() => {
+      handleRedirectToProduct(productData)
+    }}
+    style={{
+      width: '48%',
+    }}
     >
       <Box className="border-2 border-primary-0 rounded-lg ">
         <Image
           source={{
             uri: `${images[0]}`,
           }}
-          alt="Logo"
+          alt={thumbnail}
           size="none"
           className="aspect-[320/200] w-full border-b-2 border-primary-0 "
           resizeMode="contain"
@@ -47,6 +50,6 @@ export const ProductCard = ({ title, images, description, price, discountPercent
           </Box>
         </Box>
       </Box>
-    </Link>
+    </Pressable>
   )
 }

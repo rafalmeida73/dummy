@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductsListView from './view'
 import { useProductListModel } from './model'
+import { ProductsListView } from './view'
 
 const ProductsList = () => {
   const data = useProductListModel()

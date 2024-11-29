@@ -39,7 +39,7 @@ export const useSignInModel = () => {
         username: data.username,
       })
 
-      router.push('/(auth)/products_list')
+      router.push('/(auth)/product/product_list')
     } catch {
       setInvalidUser(true)
     }

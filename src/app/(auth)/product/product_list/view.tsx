@@ -10,11 +10,12 @@ import { Spinner } from '@/components/ui/spinner'
 import { HStack } from '@/components/ui/hstack'
 import { Text } from '@/components/ui/text'
 
-const ProductsListView = ({
+export const ProductsListView = ({
   productsData,
   handleChageCategory,
   selectedCategory,
-  isRefetching
+  isRefetching,
+  handleRedirectToProduct
 }: ReturnType<typeof useProductListModel>) => {
   const insets = useSafeAreaInsets()
 
@@ -72,7 +73,11 @@ const ProductsListView = ({
             const priceWithDiscount = item.price - (item.price * item?.discountPercentage || 0) / 100
 
             return (
-              <ProductCard priceWithDiscount={priceWithDiscount} {...item} />
+              <ProductCard
+                handleRedirectToProduct={handleRedirectToProduct}
+                priceWithDiscount={priceWithDiscount}
+                {...item}
+              />
             )
           }}
           ItemSeparatorComponent={() => (
@@ -95,11 +100,7 @@ const ProductsListView = ({
           showsVerticalScrollIndicator={false}
         />
       )}
-
-
-
     </Box>
   )
 }
 
-export default ProductsListView

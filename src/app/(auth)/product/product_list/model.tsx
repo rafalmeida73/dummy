@@ -2,8 +2,12 @@ import { useQuery } from '@tanstack/react-query'
 import { productByCategories } from '@/services/products/product-categories'
 import { useState } from 'react';
 import { CategoriesTypes } from './types';
+import { useRouter } from 'expo-router';
+import { ISingleProductResponse } from '@/services/products/types';
 
 export const useProductListModel = () => {
+  const router = useRouter()
+
   let isMenCategory = true
 
   const [selectedCategory, setSelectedCategory] = useState<CategoriesTypes>('men');
@@ -29,8 +33,16 @@ export const useProductListModel = () => {
       isMenCategory = category === "men"
       handleRefetch();
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
+  }
+
+  const handleRedirectToProduct = (product: ISingleProductResponse) => {
+    router.push({
+      pathname: `/(auth)/product/product_details`, params: {
+        product: JSON.stringify(product)
+      }
+    })
   }
 
   return {
@@ -38,6 +50,7 @@ export const useProductListModel = () => {
     isLoading,
     handleChageCategory,
     selectedCategory,
-    isRefetching
+    isRefetching,
+    handleRedirectToProduct
   }
 }
