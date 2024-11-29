@@ -5,6 +5,10 @@ export default function Layout() {
   return (
     <Tabs screenOptions={{
       headerShown: false,
+      tabBarStyle: {
+        backgroundColor: 'red',
+        borderTopWidth: 0,
+      },
     }}
     >
       <Screen
