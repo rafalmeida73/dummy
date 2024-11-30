@@ -1,72 +1,143 @@
 import { Box } from '@/components/ui/box'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAddOrUpdateProductModel } from './model'
-import { Icon } from '@/components/ui/icon'
-import { ChevronLeft } from 'lucide-react-native';
-import { Pressable } from '@/components/ui/pressable';
-import { Image } from '@/components/ui/image';
-import { Heading } from '@/components/ui/heading';
 import { HStack } from '@/components/ui/hstack';
-import { formatedPrice } from '@/utils/intl/formatMoney';
 import { Text } from '@/components/ui/text';
-import { Button, ButtonIcon, ButtonText } from '@/components/ui/button';
-import { Trash } from 'lucide-react-native';
-import { Pencil } from 'lucide-react-native';
+import { Button, ButtonText } from '@/components/ui/button';
 import { CustomModal } from '@/components/CustomModal';
+import { CustomInput } from '@/components/CustomInput';
+import { useRef } from 'react';
+import { TextInput } from 'react-native';
+import { Pressable } from '@/components/ui/pressable';
+import { Icon } from '@/components/ui/icon';
+import { ChevronLeft } from 'lucide-react-native';
+import { Heading } from '@/components/ui/heading';
 
 export const AddOrUpdateProductView = ({
   product,
   handleGoBack,
-  priceWithDiscount,
   handleOpenCloseModal,
-  showModal
+  showModal,
+  hasProduct,
+  form,
+  handleChangeText,
+  handleSubmitForm
 }: ReturnType<typeof useAddOrUpdateProductModel>) => {
+  const nameInputRef = useRef<TextInput>(null)
+  const descriptionInputRef = useRef<TextInput>(null)
+  const priceInputRef = useRef<TextInput>(null)
+  const discountInputRef = useRef<TextInput>(null)
+  const imageInputRef = useRef<TextInput>(null)
+
   const insets = useSafeAreaInsets()
+
+  const {
+    handleSubmit,
+    formState: { isSubmitting, errors },
+    clearErrors,
+    getValues
+  } = form
 
   return (
     <>
       <Box className="flex-1 justify-between" style={{ paddingTop: insets.top }}>
-        <Box>
-          <Box className="px-5" >
-            <Pressable
-
-              onPress={handleGoBack}
-            >
-              <Icon as={ChevronLeft} className="text-primary-950" size="xl" />
-            </Pressable>
+        <Box className='px-5'>
+          <Box className='mb-8 '>
+            <HStack space='md' className="items-center">
+              <Pressable
+                onPress={handleGoBack}
+              >
+                <Icon as={ChevronLeft} className="text-primary-950" size="xl" />
+              </Pressable>
+              <Heading size='2xl'>
+                {hasProduct ? "Editar produto" : "Excluir produto"}
+              </Heading>
+            </HStack>
           </Box>
 
-          <Image
-            source={{
-              uri: `${product.images[0]}`,
-            }}
-            alt={product.thumbnail}
-            size="none"
-            className="aspect-[320/200] w-full"
-            resizeMode="contain"
+          <Box className="mb-6">
+            <CustomInput
+              ref={nameInputRef}
+              label="Nome"
+              returnKeyType="next"
+              error={errors.title?.message}
+              onChangeText={(text) => {
+                clearErrors('title')
+                handleChangeText('title', text)
+              }}
+              defaultValue={product?.title}
+              onSubmitEditing={() => {
+                descriptionInputRef!.current!.focus()
+              }}
+            />
+          </Box>
 
-          />
+          <Box className="mb-6">
+            <CustomInput
+              ref={descriptionInputRef}
+              label="Descrição"
+              returnKeyType="next"
+              error={errors.description?.message}
+              onChangeText={(text) => {
+                clearErrors('description')
+                handleChangeText('description', text)
+              }}
+              defaultValue={product?.description}
+              onSubmitEditing={() => {
+                priceInputRef!.current!.focus()
+              }}
+            />
+          </Box>
 
-          <Box className="mt-3 px-5" >
-            <Heading size="3xl" className="text-primary-950 font-bold mt-5">
-              {product.title}
-            </Heading>
+          <Box className="mb-6">
+            <CustomInput
+              ref={priceInputRef}
+              label="Preço (R$)"
+              returnKeyType="next"
+              error={errors.price?.message}
+              onChangeText={(text) => {
+                clearErrors('price')
+                handleChangeText('price', text)
+              }}
+              keyboardType='numeric'
+              defaultValue={product?.price?.toString?.()}
+              onSubmitEditing={() => {
+                discountInputRef!.current!.focus()
+              }}
+            />
+          </Box>
 
-            <HStack space="sm" className="mt-4 items-center ">
-              <Heading size="lg" className="text-red-700 font-bold ">
-                {formatedPrice(priceWithDiscount)}
-              </Heading>
+          <Box className="mb-6">
+            <CustomInput
+              ref={discountInputRef}
+              label="Desconto (%)"
+              returnKeyType="next"
+              error={errors.discountPercentage?.message}
+              onChangeText={(text) => {
+                clearErrors('discountPercentage')
+                handleChangeText('discountPercentage', text)
+              }}
+              keyboardType='numeric'
+              defaultValue={(product?.discountPercentage)?.toString?.()}
+              onSubmitEditing={() => {
+                imageInputRef!.current!.focus()
+              }}
+            />
+          </Box>
 
-              {product?.discountPercentage > 0 && (
-                <Text size="md" className="line-through font-bold">
-                  {formatedPrice(product.price)}
-                </Text>
-              )}
-            </HStack>
-
-            <Text size='md' numberOfLines={15} className='h-64 mt-3'>
-              {product.description}
-            </Text>
+          <Box className="mb-6">
+            <CustomInput
+              ref={imageInputRef}
+              label="URL da imagem"
+              returnKeyType="send"
+              error={errors.image?.message}
+              onChangeText={(text) => {
+                clearErrors('image')
+                handleChangeText('image', text)
+              }}
+              defaultValue={product?.images?.[0]}
+              onSubmitEditing={handleSubmit(handleSubmitForm)}
+            />
           </Box>
         </Box>
 
@@ -76,25 +147,14 @@ export const AddOrUpdateProductView = ({
             variant="solid"
             action="primary"
             className="bg-info-700 mb-7"
+            onPress={handleSubmit(handleSubmitForm)}
           >
-            <ButtonText className="font-bold">Editar</ButtonText>
-            <ButtonIcon as={Pencil} />
-          </Button>
-
-          <Button
-            size="lg"
-            variant="solid"
-            action="primary"
-            className="bg-red-500 mb-5"
-            onPress={handleOpenCloseModal}
-          >
-            <ButtonText className="font-bold">Excluir</ButtonText>
-            <ButtonIcon as={Trash} />
+            <ButtonText className="font-bold">Salvar</ButtonText>
           </Button>
         </Box>
       </Box>
 
-      <CustomModal handleClose={handleOpenCloseModal} showModal={showModal} title="Excluir produto" footer={
+      <CustomModal handleClose={handleOpenCloseModal} showModal={showModal} title="Editar produto" footer={
         <Box>
           <HStack space='md'>
             <Button
@@ -110,16 +170,16 @@ export const AddOrUpdateProductView = ({
               size="lg"
               variant="solid"
               action="primary"
-              className="bg-red-500"
+              className="bg-info-700"
               onPress={handleOpenCloseModal}
             >
-              <ButtonText className="font-bold">Excluir</ButtonText>
+              <ButtonText className="font-bold">Editar</ButtonText>
             </Button>
           </HStack>
         </Box>
       }>
-        <Text size='lg' numberOfLines={15} className=' mt-3'>
-          Você tem certeza que deseja excluir esse produto? Essa ação não poderá ser desfeita.
+        <Text size='lg' numberOfLines={15} className='mt-3'>
+          Você tem certeza que deseja editar esse produto? Essa ação não poderá ser desfeita.
         </Text>
       </CustomModal>
 

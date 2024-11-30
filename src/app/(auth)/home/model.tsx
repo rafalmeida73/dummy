@@ -3,41 +3,15 @@ import { productByCategories } from '@/services/products/product-categories'
 import { useState } from 'react';
 import { CategoriesTypes } from './types';
 
-export const useProductListModel = () => {
-  let isMenCategory = true
+export const useHomeViewModel = () => {
+  const [showModal, setShowModal] = useState(false)
 
-  const [selectedCategory, setSelectedCategory] = useState<CategoriesTypes>('men');
-
-  const menCategories = ['mens-shirts', 'mens-shoes', 'mens-watches']
-  const womanCategories = ['womens-bags', 'womens-dresses', 'womens-jewellery', "womens-shoes", "womens-watches"]
-
-  const { data: productsData, isLoading, refetch, isRefetching } = useQuery({
-    queryKey: ['productByCategories'],
-    queryFn: () =>
-      productByCategories({
-        categories: isMenCategory ? menCategories : womanCategories,
-      }),
-  })
-
-  const handleRefetch = () => {
-    refetch();
-  }
-
-  const handleChageCategory = (category: CategoriesTypes) => {
-    try {
-      setSelectedCategory(category);
-      isMenCategory = category === "men"
-      handleRefetch();
-    } catch (error) {
-      console.error(error)
-    }
+  const handleOpenCloseModal = () => {
+    setShowModal(!showModal)
   }
 
   return {
-    productsData,
-    isLoading,
-    handleChageCategory,
-    selectedCategory,
-    isRefetching
+    handleOpenCloseModal,
+    showModal
   }
 }

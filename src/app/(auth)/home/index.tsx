@@ -1,13 +1,13 @@
 import React from 'react'
-import { useProductListModel } from './model'
-import { ProductsListView } from './view'
+import { useHomeViewModel } from './model'
+import { HomeView } from './view'
 
-const ProductsList = () => {
-  const data = useProductListModel()
+const Home = () => {
+  const data = useHomeViewModel()
 
   return (
-    <ProductsListView {...data} />
+    <HomeView {...data} />
   )
 }
 
-export default ProductsList
+export default Home
