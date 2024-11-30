@@ -9,13 +9,16 @@ import { useProductListModel } from './model'
 import { Spinner } from '@/components/ui/spinner'
 import { HStack } from '@/components/ui/hstack'
 import { Text } from '@/components/ui/text'
+import { Fab, FabIcon } from '@/components/ui/fab'
+import { Plus } from 'lucide-react-native';
 
 export const ProductsListView = ({
   productsData,
   handleChageCategory,
   selectedCategory,
   isRefetching,
-  handleRedirectToProduct
+  handleRedirectToProduct,
+  handleRedirectToAddProduct
 }: ReturnType<typeof useProductListModel>) => {
   const insets = useSafeAreaInsets()
 
@@ -100,6 +103,18 @@ export const ProductsListView = ({
           showsVerticalScrollIndicator={false}
         />
       )}
+
+      <Fab
+        size="lg"
+        className='bg-info-700'
+        placement="bottom right"
+        isHovered={false}
+        isDisabled={false}
+        isPressed={true}
+        onPress={handleRedirectToAddProduct}
+      >
+        <FabIcon as={Plus} />
+      </Fab>
     </Box>
   )
 }

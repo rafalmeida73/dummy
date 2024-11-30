@@ -12,7 +12,7 @@ export const useAddOrUpdateProductModel = () => {
   const item = useLocalSearchParams<{
     product: string
   }>();
-  const product = JSON.parse(item.product) as ISingleProductResponse;
+  const product = item.product ? JSON.parse(item.product) as ISingleProductResponse : null;
 
   const router = useRouter()
   const [showModal, setShowModal] = useState(false)
@@ -29,7 +29,7 @@ export const useAddOrUpdateProductModel = () => {
       await updateProduct(data),
   })
 
-  const priceWithDiscount = product.price - (product.price * product?.discountPercentage || 0) / 100
+  const priceWithDiscount = product ? product.price - (product.price * product?.discountPercentage || 0) / 100 : 0
 
   const handleGoBack = () => {
     router.back()
@@ -42,10 +42,14 @@ export const useAddOrUpdateProductModel = () => {
   const handleSubmitForm = async (data: AddOrUpdateProductSchemaType) => {
     try {
       if (product) {
+        let images = product.images
+        const hasImage = images.includes(data?.image)
+        !hasImage && images.unshift(data.image)
+
         const productUpdated = await updateProductMutation({
           ...product,
           ...data,
-          images: [...product.images, ...data.image],
+          images: images,
           discountPercentage: Number(data.discountPercentage),
           price: Number(data.price)
         })
@@ -59,7 +63,6 @@ export const useAddOrUpdateProductModel = () => {
         return
       }
 
-
       const newProduct = await addProductMutation({
         ...data
       })
@@ -69,14 +72,17 @@ export const useAddOrUpdateProductModel = () => {
           product: JSON.stringify(newProduct)
         }
       })
-    } catch {
-      console.log('error')
+    } catch (e) {
+      console.error('error', e)
+    } finally {
+      handleOpenCloseModal()
     }
   }
 
   useEffect(() => {
     if (product) {
       form.setValue('title', product.title)
+      form.setValue('description', product.description)
       form.setValue('price', product.price.toString())
       form.setValue('discountPercentage', (product.discountPercentage).toString())
       form.setValue('image', product.images[0])

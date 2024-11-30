@@ -108,9 +108,14 @@ export const SignInView = ({
               disabled={isSubmitting}
             >
               {isSubmitting
-                ? (<ButtonSpinner />)
-                : (<ButtonText className="font-bold">Entrar</ButtonText>)}
-
+                ? (
+                  <ButtonSpinner />
+                )
+                :
+                (
+                  <ButtonText className="font-bold">Entrar</ButtonText>
+                )
+              }
             </Button>
           </Box>
         </Box>

@@ -45,12 +45,17 @@ export const useProductListModel = () => {
     })
   }
 
+  const handleRedirectToAddProduct = () => {
+    router.push({ pathname: "/(auth)/product/product_update_add" })
+  }
+
   return {
     productsData,
     isLoading,
     handleChageCategory,
     selectedCategory,
     isRefetching,
-    handleRedirectToProduct
+    handleRedirectToProduct,
+    handleRedirectToAddProduct
   }
 }

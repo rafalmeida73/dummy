@@ -3,7 +3,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAddOrUpdateProductModel } from './model'
 import { HStack } from '@/components/ui/hstack';
 import { Text } from '@/components/ui/text';
-import { Button, ButtonText } from '@/components/ui/button';
+import { Button, ButtonSpinner, ButtonText } from '@/components/ui/button';
 import { CustomModal } from '@/components/CustomModal';
 import { CustomInput } from '@/components/CustomInput';
 import { useRef } from 'react';
@@ -21,7 +21,7 @@ export const AddOrUpdateProductView = ({
   hasProduct,
   form,
   handleChangeText,
-  handleSubmitForm
+  handleSubmitForm,
 }: ReturnType<typeof useAddOrUpdateProductModel>) => {
   const nameInputRef = useRef<TextInput>(null)
   const descriptionInputRef = useRef<TextInput>(null)
@@ -35,7 +35,6 @@ export const AddOrUpdateProductView = ({
     handleSubmit,
     formState: { isSubmitting, errors },
     clearErrors,
-    getValues
   } = form
 
   return (
@@ -50,7 +49,7 @@ export const AddOrUpdateProductView = ({
                 <Icon as={ChevronLeft} className="text-primary-950" size="xl" />
               </Pressable>
               <Heading size='2xl'>
-                {hasProduct ? "Editar produto" : "Excluir produto"}
+                {hasProduct ? "Editar produto" : "Adicionar produto"}
               </Heading>
             </HStack>
           </Box>
@@ -147,7 +146,7 @@ export const AddOrUpdateProductView = ({
             variant="solid"
             action="primary"
             className="bg-info-700 mb-7"
-            onPress={handleSubmit(handleSubmitForm)}
+            onPress={handleOpenCloseModal}
           >
             <ButtonText className="font-bold">Salvar</ButtonText>
           </Button>
@@ -171,8 +170,17 @@ export const AddOrUpdateProductView = ({
               variant="solid"
               action="primary"
               className="bg-info-700"
-              onPress={handleOpenCloseModal}
+              onPress={handleSubmit(handleSubmitForm)}
             >
+              {isSubmitting ?
+                (
+                  <ButtonSpinner />
+                )
+                :
+                (
+                  <ButtonText className="font-bold">Editar</ButtonText>
+                )
+              }
               <ButtonText className="font-bold">Editar</ButtonText>
             </Button>
           </HStack>

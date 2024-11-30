@@ -8,7 +8,7 @@ import { ChevronRight } from 'lucide-react-native';
 
 export const CardLink = ({ title, icon, href }: ICardLinkProps) => {
   return (
-    <Link href={href}>
+    <Link href={href} disabled>
       <Box className="border-2 border-primary-0 rounded-lg p-3 w-full">
         <HStack className='items-center justify-between'>
           <HStack className='items-center'>

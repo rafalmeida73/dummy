@@ -16,7 +16,9 @@ export const useProductsDetailsModel = () => {
   })
 
   const router = useRouter()
+  
   const [showModal, setShowModal] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const priceWithDiscount = product.price - (product.price * product?.discountPercentage || 0) / 100
 
@@ -34,6 +36,7 @@ export const useProductsDetailsModel = () => {
 
   const handleDeleteProduct = async () => {
     try {
+      setIsLoading(true)
       await mutateAsync({
         id: product.id
       })
@@ -42,6 +45,8 @@ export const useProductsDetailsModel = () => {
       router.push('/(auth)/product/product_list')
     } catch {
       console.error('error')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -53,6 +58,7 @@ export const useProductsDetailsModel = () => {
     handleOpenCloseModal,
     handleRedirectToEditProduct,
     handleDeleteProduct,
-    deleteProductLoading
+    deleteProductLoading,
+    isLoading
   }
 }
