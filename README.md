@@ -1,8 +1,14 @@
-# Welcome to your Expo app 👋
+# Dummy 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Desenvolvi um projeto em React Native simulando uma loja de roupas, utilizando a arquitetura MVVM (Model-View-ViewModel). Essa abordagem ajuda a separar de forma clara a lógica de negócios da camada de apresentação, promovendo uma estrutura de código mais organizada e escalável.
 
-## Get started
+Para a construção da interface de usuário (UI), utilizei o Gluestack, uma biblioteca que facilita a criação de componentes responsivos e estilizados de maneira eficiente. Além disso, integrei o Lucide Icons, garantindo uma vasta coleção de ícones modernos e de alta qualidade para enriquecer a experiência visual do app.
+
+Para as validações de formulários, optei pelo Zod, uma biblioteca extremamente compatível com TypeScript. O Zod se destaca por sua simplicidade, flexibilidade e por oferecer validações precisas de dados, integrando-se perfeitamente ao fluxo de desenvolvimento.
+
+Além disso, implementei uma solução global para gerenciamento de estado utilizando o Zustand. Com isso, é possível salvar e gerenciar de maneira simples e eficiente os dados do usuário em todo o aplicativo, garantindo uma experiência mais fluida.
+
+## Iniando projeto
 
 1. Install dependencies
 
@@ -13,38 +19,13 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 2. Start the app
 
    ```bash
-    npx expo start
+    npx expo start --clear
    ```
 
-In the output, you'll find options to open the app in a
+## Vídeo do projeto
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## TO-DO
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Testes unitários;
+- Mudar ícones do app e splash screen;
+- Criar o back-end.

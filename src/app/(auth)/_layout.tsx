@@ -11,10 +11,10 @@ export default function Layout() {
       tabBarStyle: {
         width: '100%',
       },
-      tabBarIcon: ({ focused, color }) => {
+      tabBarIcon: ({ focused }) => {
         return buildIcon(focused, route.name as keyof typeof TabBarIconLabel)
       },
-      tabBarLabel: ({ focused, color }) => {
+      tabBarLabel: ({ focused }) => {
         return buildLabel(focused, route.name as keyof typeof TabBarIconLabel)
       },
     })}

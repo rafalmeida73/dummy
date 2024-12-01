@@ -17,7 +17,8 @@ export const HomeView = ({
   handleOpenCloseModal,
   showModal,
   handleLogout,
-  isLoading
+  isLoading,
+  user
 }: ReturnType<typeof useHomeViewModel>) => {
 
   return (
@@ -31,12 +32,12 @@ export const HomeView = ({
           <Avatar size='2xl' className='absolute -mt-14'>
             <AvatarImage
               source={{
-                uri: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+                uri: user.image,
               }}
             />
           </Avatar>
-          <Heading size='2xl' className='mt-20'>João da Silva</Heading>
-          <Text size='2xl' className='mt-3'>joaodasilva@gmail.com</Text>
+          <Heading size='2xl' className='mt-20'>{user.username}</Heading>
+          <Text size='2xl' className='mt-3'>{user.email}</Text>
 
           <Box className='px-5 bg-re'>
             <Box className=' mt-10 gap-5'>
@@ -78,7 +79,9 @@ export const HomeView = ({
               className="bg-red-600 mt-8"
               onPress={handleOpenCloseModal}
             >
-              <ButtonText className="font-bold w-full text-center">Sair da conta</ButtonText>
+              <ButtonText className="font-bold w-full text-center">
+                Sair da conta
+              </ButtonText>
             </Button>
           </Box>
         </Box>

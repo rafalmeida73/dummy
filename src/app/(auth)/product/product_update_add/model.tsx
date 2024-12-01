@@ -16,6 +16,7 @@ export const useAddOrUpdateProductModel = () => {
 
   const router = useRouter()
   const [showModal, setShowModal] = useState(false)
+  const hasProduct = !!product
 
   const form = useForm<AddOrUpdateProductSchemaType>({ resolver: zodResolver(AddOrUpdateProductSchema) })
 
@@ -75,7 +76,7 @@ export const useAddOrUpdateProductModel = () => {
     } catch (e) {
       console.error('error', e)
     } finally {
-      handleOpenCloseModal()
+      hasProduct && handleOpenCloseModal() 
     }
   }
 
@@ -99,7 +100,7 @@ export const useAddOrUpdateProductModel = () => {
     priceWithDiscount,
     showModal,
     handleOpenCloseModal,
-    hasProduct: !!product,
+    hasProduct,
     handleSubmitForm,
     form,
     handleChangeText

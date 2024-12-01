@@ -6,9 +6,11 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { LoginSchema, LoginSchemaType } from './types'
 import { useRouter } from 'expo-router'
+import { useUser } from '@/hooks/useUser.ts'
 
 export const useSignInModel = () => {
   const router = useRouter()
+  const { setUser } = useUser()
 
   const [showPassword, setShowPassword] = useState(false)
   const [invalidUser, setInvalidUser] = useState(false)
@@ -34,10 +36,12 @@ export const useSignInModel = () => {
         setInvalidUser(false)
       }
 
-      await mutateAsync({
+      const user = await mutateAsync({
         password: data.password,
         username: data.username,
       })
+
+      setUser(user)
 
       router.push('/(auth)/product/product_list')
     } catch {

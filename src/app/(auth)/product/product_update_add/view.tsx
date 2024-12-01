@@ -39,7 +39,7 @@ export const AddOrUpdateProductView = ({
 
   return (
     <>
-      <Box className="flex-1 justify-between" style={{ paddingTop: insets.top }}>
+      <Box className="flex-1 justify-between bg-secondary-0" style={{ paddingTop: insets.top }}>
         <Box className='px-5'>
           <Box className='mb-8 '>
             <HStack space='md' className="items-center">
@@ -146,7 +146,7 @@ export const AddOrUpdateProductView = ({
             variant="solid"
             action="primary"
             className="bg-info-700 mb-7"
-            onPress={handleOpenCloseModal}
+            onPress={!hasProduct ? handleSubmit(handleSubmitForm) : handleOpenCloseModal}
           >
             <ButtonText className="font-bold">Salvar</ButtonText>
           </Button>

@@ -25,9 +25,6 @@ export const SignInView = ({
     clearErrors,
   } = form
 
-  form.setValue('username', 'emilys')
-  form.setValue('password', 'emilyspass')
-
   return (
     <>
       <StatusBar style="light" />

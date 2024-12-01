@@ -39,7 +39,6 @@ export const ProductsDetailsView = ({
           <Box>
             <Box className="px-5" >
               <Pressable
-
                 onPress={handleGoBack}
               >
                 <Icon as={ChevronLeft} className="text-primary-950" size="xl" />
