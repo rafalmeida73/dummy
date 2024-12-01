@@ -24,6 +24,11 @@ Além disso, implementei uma solução global para gerenciamento de estado utili
 
 ## Vídeo do projeto
 
+
+https://github.com/user-attachments/assets/49a0f08f-caff-49c6-93b4-f4db2a683494
+
+
+
 ## TO-DO
 
 - Testes unitários;
